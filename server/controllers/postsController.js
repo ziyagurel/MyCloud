@@ -1,6 +1,10 @@
+import mongoose from 'mongoose';
 import PostMessage from '../models/postMessage.js';
 
+// eş zamansız çalışması için async kullanılır.
+// aynı zamanda ağırlığı dengelemek için await kullanımıda yapılır. Örnek olarak update metodu...
 
+//get motod
 export const getPosts = async (req, res) => {
     try {
         const postMessages = await PostMessage.find();
@@ -11,6 +15,7 @@ export const getPosts = async (req, res) => {
     }
 }
 
+//create metod
 export const createPost = async (req, res) => {
     const post = req.body;
 
@@ -22,4 +27,15 @@ export const createPost = async (req, res) => {
     } catch (error) {
         res.status(409).json({message: error.message});
     }
+}
+
+//update metod
+export const updatePost = async (req, res) => {
+    const { id : _id } = req.params;
+
+    if(mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No post with that id');
+
+    const updatedPost = await PostMessage.findByIdAndUpdate(_id, post, {new: true}); 
+
+    res.json(updatePost);
 }
