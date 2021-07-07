@@ -14,7 +14,7 @@ const App = () => {
 
     useEffect(() => {
         dispatch(getPosts()); //action/post.js den export ediliyor. App.js --> actions/posts.js --> reducers/posts.js
-    }, [dispatch]);
+    }, [currentId,dispatch]);
 
     return (
         <Container maxWidth="lg">
