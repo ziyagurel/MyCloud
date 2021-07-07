@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import Post from './Post/Post';
 import useStyles from './styles';
 
-const Posts = (setCurrentId) => {
+const Posts = ({setCurrentId}) => {
     const classes = useStyles();
     const posts = useSelector( (state) => state.posts )
     //setCurrentId, güncellenecek olan mevcut id en alt tabakadan en üst tabaya kadar taşımamızı sağlar.
